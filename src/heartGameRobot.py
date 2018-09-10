@@ -6,9 +6,9 @@ class AHeartGameRoBot(object):
 
     def __init__ (self, player_name):
         self.round_cards_history = []
-        self.pick_his={}
+        self.pick_his = {}
         self.round_cards = {}
-        self.score_cards={}
+        self.score_cards = {}
         self.player_name = player_name
         self.players_current_picked_cards = []
         self.game_score_cards = {Card("QS"), Card("TC"), Card("2H"), Card("3H"), Card("4H"), Card("5H"), Card("6H"),
@@ -48,16 +48,16 @@ class AHeartGameRoBot(object):
 
     def reset_card_his(self):
         self.round_cards_history = []
-        self.pick_his={}
+        self.pick_his = {}
 
     def get_card_history(self):
         return self.round_cards_history
 
     def turn_end (self, data):
-        turnCard=data['turnCard']
-        turnPlayer=data['turnPlayer']
-        players=data['players']
-        is_timeout=data['serverRandom']
+        turnCard = data['turnCard']
+        turnPlayer = data['turnPlayer']
+        players = data['players']
+        is_timeout = data['serverRandom']
         for player in players:
             player_name = player['playerName']
             if player_name == self.player_name:
@@ -68,7 +68,7 @@ class AHeartGameRoBot(object):
         opp_pick = {}
         opp_pick[turnPlayer] = Card(turnCard)
         if (self.pick_his.get(turnPlayer)) != None:
-            pick_card_list=self.pick_his.get(turnPlayer)
+            pick_card_list = self.pick_his.get(turnPlayer)
             pick_card_list.append(Card(turnCard))
             self.pick_his[turnPlayer] = pick_card_list
         else:
@@ -76,7 +76,7 @@ class AHeartGameRoBot(object):
             pick_card_list.append(Card(turnCard))
             self.pick_his[turnPlayer] = pick_card_list
         self.round_cards_history.append(Card(turnCard))
-        self.pick_history(data,is_timeout,opp_pick)
+        self.pick_history(data, is_timeout, opp_pick)
 
     def get_cards (self, data):
         try:
@@ -94,8 +94,8 @@ class AHeartGameRoBot(object):
             return None
 
     def get_round_scores (self, is_expose_card = False, data = None):
-        if data!=None:
-            players=data['roundPlayers']
+        if data != None:
+            players = data['roundPlayers']
             picked_user = players[0]
             round_card = self.round_cards.get(picked_user)
             score_cards = []

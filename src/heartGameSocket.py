@@ -28,7 +28,7 @@ class HeartGameSocket(object):
            self.game_bot.receive_opponent_cards(data)
        elif action =='expose_cards':
            export_cards = self.game_bot.expose_my_cards(data)
-           if export_cards!=None:
+           if export_cards != None:
                self.ws.send(json.dumps(
                    {
                        'eventName': 'expose_my_cards',
@@ -41,7 +41,7 @@ class HeartGameSocket(object):
            self.game_bot.expose_cards_end(data)
        elif action == 'your_turn':
            pick_card = self.game_bot.pick_card(data)
-           message='Send message:{}'.format(json.dumps(
+           message = 'Send message:{}'.format(json.dumps(
                 {
                    'eventName': 'pick_card',
                    'data': {
@@ -71,6 +71,7 @@ class HeartGameSocket(object):
        elif action == 'game_end':
            self.game_bot.game_over(data)
            self.ws.close()
+
     def doListen (self):
         try:
             self.ws = create_connection(self.connect_url)
@@ -84,7 +85,7 @@ class HeartGameSocket(object):
             }))
             while 1:
                 result = self.ws.recv()
-                msg = json.loads(result)
+                msg = json.loads(result)1
                 event_name = msg['eventName']
                 data = msg['data']
                 system_log.show_message(event_name)

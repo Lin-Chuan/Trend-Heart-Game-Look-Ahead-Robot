@@ -9,6 +9,7 @@ class LookAheadRobot (AHeartGameRoBot):
         self.my_hand_cards = []
         self.expose_card = False
         self.my_pass_card = []
+
     def receive_cards (self, data):
         self.my_hand_cards = self.get_cards(data)
 
@@ -21,7 +22,7 @@ class LookAheadRobot (AHeartGameRoBot):
         pass_cards = []
         count = 0
         for i in range(len(self.my_hand_cards)):
-            card=self.my_hand_cards[len(self.my_hand_cards) - (i + 1)]
+            card = self.my_hand_cards[len(self.my_hand_cards) - (i + 1)]
             if card == Card("QS"):
                 pass_cards.append(card)
                 count += 1
@@ -95,12 +96,12 @@ class LookAheadRobot (AHeartGameRoBot):
                 system_log.show_message(e.message)
                 system_log.save_logs(e.message)
         if expose_player != None and expose_card != None:
-            message="Player:{}, Expose card:{}".format(expose_player,expose_card)
+            message = "Player:{}, Expose card:{}".format(expose_player,expose_card)
             system_log.show_message(message)
             system_log.save_logs(message)
             self.expose_card = True
         else:
-            message="No player expose card!"
+            message = "No player expose card!"
             system_log.show_message(message)
             system_log.save_logs(message)
             self.expose_card = False
@@ -130,7 +131,7 @@ class LookAheadRobot (AHeartGameRoBot):
     def deal_end (self, data):
         self.my_hand_cards = []
         self.expose_card = False
-        deal_scores,initial_cards,receive_cards,picked_cards = self.get_deal_scores(data)
+        deal_scores, initial_cards, receive_cards, picked_cards = self.get_deal_scores(data)
         message = "Player name:{}, Pass Cards:{}".format(self.player_name, self.my_pass_card)
         system_log.show_message(message)
         system_log.save_logs(message)
